@@ -3,7 +3,6 @@ package dadosMestres;
 import org.junit.Test;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.*;
 
@@ -25,14 +24,10 @@ public class IntegracaoApiTests {
 			.statusCode(200)
 			.contentType(ContentType.JSON)
 			.body(contains("DB Time:"));
-		
-		
-		
-		 
 	}
 	
 	@Test
-	public void b() {
+	public void c() {
 		
 	}
 }
