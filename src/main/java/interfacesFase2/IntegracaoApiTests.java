@@ -1,11 +1,12 @@
-package dadosMestres;
+package interfacesFase2;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.cedarsoftware.util.io.JsonWriter;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -16,77 +17,116 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.cedarsoftware.util.io.JsonWriter;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 public class IntegracaoApiTests {
-
+	
+	
 	private String baseURI = "http://10.104.29.102/QAFase2/QAWebAPIFase2/api/";
 	static ExtentReports extent;
 	static ExtentHtmlReporter report;
 
-	@BeforeClass
-	public static void statTest() {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy-HHmmss");
-		Date date = new Date(System.currentTimeMillis());
-		
-		report = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/TestReport " + formatter.format(date) + ".html");
-		report.config().setDocumentTitle("Automation Report"); // Titulo do relaorio
-		report.config().setReportName("API Testing"); // Nome do Relatorio
-		report.config().setTheme(Theme.DARK);
-
-		extent = new ExtentReports();
-		extent.attachReporter(report);
-		extent.setSystemInfo("Host Name", "localhost");
-		extent.setSystemInfo("Enviroment", "QA");
-		extent.setSystemInfo("user", "Edcandido");
-		
-	}
+//	@BeforeClass
+//	public static void statTest() {
+//		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy-HHmmss");
+//		Date date = new Date(System.currentTimeMillis());
+//		
+//		report = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/TestReport " + formatter.format(date) + ".html");
+//		report.config().setDocumentTitle("Automation Report"); // Titulo da aba do relatorio
+//		report.config().setReportName("API Testing"); // Nome do Relatorio
+//		report.config().setTheme(Theme.DARK);
+//
+//		extent = new ExtentReports();
+//		extent.attachReporter(report);
+//		extent.setSystemInfo("Host Name", "localhost");
+//		extent.setSystemInfo("Enviroment", "QA");
+//		extent.setSystemInfo("user", "Edcandido");
+//		
+//	}
+//	
+//	@AfterClass
+//	public static void endTest() {
+//		extent.flush();
+//		
+//	}
 	
-	@AfterClass
-	public static void endTest() {
-		extent.flush();
-		
-	}
+//	public void logTestResult(Status status, String rest, Response resp,  String name, String descricao) {
+//		ExtentTest teste;
+//		teste = master.extent.createTest(name);
+//		
+//		if(descricao != "") 
+//			teste.log(status, "Descricao: " + descricao);
+//		
+//		teste.log(status, "Status Code: " + resp.getStatusCode());
+//		teste.log(status, "Rest: <pre>" + JsonWriter.formatJson(rest) + "</pre>");
+//		teste.log(status, "Response: <pre>" + JsonWriter.formatJson(resp.getBody().asString()) + "</pre>");
+//	}
 	
-	public void logTestResult(Status status, Response resp, String name) {
-		ExtentTest teste;
-		teste = extent.createTest(name);
-		teste.log(status, "<pre>" + JsonWriter.formatJson(resp.getBody().asString()) + "</pre>");
-	}
-
 	@Test
-	public void getPing() {
-		String resource = "PingService";
-
-		given().header("versao-api", 1).when().get(baseURI + resource).then().statusCode(200)
-				.contentType(ContentType.JSON).body(containsString("DB Time:"));
-	}
-
-	@Test
-	public void postConsultaEstoqueSapComEstoque() {
-		String resource = "ConsultaEstoqueSAP";
-
-		String body = "{\"Matnr\": \"1000000058\", " + "\"Werks\": \"10427805\", " + "\"Lgort\": \"0219\", "
-				+ "\"Charg\": \"0000000069\"}";
-
-		Response resp = 
-		given().header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(baseURI + resource).then()
-				.assertThat().statusCode(200).contentType(ContentType.JSON)
-				.body("MatConsEstoqResponse.TabMatReturn.Lgort", hasItem("1100"))
-				.body("MatConsEstoqResponse.TabMatReturn.Licha", hasItem("PRCT0092019"))
-				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItem("25.000 "))
-				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItem("0"))
-			.extract()
-			.response();
-		
-		logTestResult(Status.PASS, resp, new Throwable().getStackTrace()[0].getMethodName());
-		
-		
-//		System.out.println(baseURI + resource);
-//		System.out.println(resp.getBody().asString());
-	}
+//	public void getPing() {
+//		String resource = "PingService";
+//
+//		given().header("versao-api", 1).when().get(baseURI + resource).then().statusCode(200)
+//				.contentType(ContentType.JSON).body(containsString("DB Time:"));
+//	}
+	
+//	@Test
+//	public void postConsultaEstoqueSapComEstoque() {
+//		String resource = "ConsultaEstoqueSAP";
+//	
+//		String body = "{\"Matnr\": \"1000000058\", " 
+//				+ "\"Werks\": \"10427805\", " 
+//				+ "\"Lgort\": \"0219\", "
+//				+ "\"Charg\": \"0000000069\"}"
+//				+ "\"Licha\": \"\""
+//				+ "\"Vfdat\": \"\""
+//				+ "\"Z_mfrnr\": \"\""
+//				+ "\"Ean11\": \"\""
+//				+ "\"Zzdtmx\": \"\"";
+//		
+//		System.out.println(InterfaceMaster.baseURI);
+//		
+//		Response resp=given()
+//				.header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(master.baseURI + resource).then()
+////				.assertThat().statusCode(200).contentType(ContentType.JSON)
+//				.extract()
+//				.response();
+//		if(resp.getStatusCode() == 200) {
+//			
+//			String lgort = resp.jsonPath().getString("MatConsEstoqResponse.TabMatReturn.Lgort");
+//			String licha = resp.jsonPath().getString("MatConsEstoqResponse.TabMatReturn.Licha");
+//			String clabs = resp.jsonPath().getString("MatConsEstoqResponse.TabMatReturn.Clabs");
+//			String labst = resp.jsonPath().getString("MatConsEstoqResponse.TabMatReturn.Labst");
+//			
+//			if(lgort.equals("[1100]") && licha.equals("[PRCT0092019]") && 
+//			   clabs.equals("[25.000 ]") && labst.equals("[0]") )
+//			{
+//				master.logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName(), "");
+//			}else {
+//				master.logTestResult(Status.FAIL, body, resp, new Throwable().getStackTrace()[0].getMethodName(), "");
+//			}
+//
+////			System.out.println(resp.getStatusCode());
+//		}else
+//		{
+//			
+////			System.out.println(resp.getStatusCode());
+//			master.logTestResult(Status.FAIL, body, resp, new Throwable().getStackTrace()[0].getMethodName(),"");
+//
+//			
+////			System.out.println("erro");
+//			
+//		
+//		}
+//			
+//		
+////		
+//////		System.out.println(baseURI + resource);
+////		System.out.println(resp.getStatusCode());
+//	}
 
 	@Test
 	public void postConsultaEstoqueSapComEstoqueMaisDeUmCodigoBarras() {	
@@ -102,7 +142,7 @@ public class IntegracaoApiTests {
 				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItems("25.000 ", "100.000 "))
 				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItems("0", "0")).extract().response();
 		
-		logTestResult(Status.PASS, resp, new Throwable().getStackTrace()[0].getMethodName());
+		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
 	}
 
 	@Test
@@ -123,7 +163,7 @@ public class IntegracaoApiTests {
 				.response();
 
 
-		logTestResult(Status.FAIL, resp, new Throwable().getStackTrace()[0].getMethodName());
+		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
 
 	}
 
