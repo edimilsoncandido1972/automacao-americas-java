@@ -34,13 +34,14 @@ public class InterfacePingService {
 		if(resp.getStatusCode()==200)
 		{
 			if (resp.getBody().asString().contains("DB Time:"))
-				InterfaceMaster.logTestResult(Status.PASS, "", resp, new Throwable().getStackTrace()[0].getMethodName(), "");
+				InterfaceMaster.logTestResult(Status.PASS, "", resp, new Throwable().getStackTrace()[0].getMethodName(),200, "","");
 			else
-				InterfaceMaster.logTestResult(Status.FAIL, "", resp, new Throwable().getStackTrace()[0].getMethodName(), "");
+				InterfaceMaster.logTestResult(Status.FAIL, "", resp, new Throwable().getStackTrace()[0].getMethodName(),200, "","");
 		}
 		else
 		{
-			InterfaceMaster.logTestResult(Status.FAIL, "", resp, new Throwable().getStackTrace()[0].getMethodName(), "");
+			InterfaceMaster.logTestResult(Status.FAIL, "", resp, new Throwable().getStackTrace()[0].getMethodName(),200, "","");
 		}
 	}
 }
+

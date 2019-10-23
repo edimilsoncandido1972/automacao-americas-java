@@ -128,44 +128,44 @@ public class IntegracaoApiTests {
 ////		System.out.println(resp.getStatusCode());
 //	}
 
-	@Test
-	public void postConsultaEstoqueSapComEstoqueMaisDeUmCodigoBarras() {	
-		String resource = "ConsultaEstoqueSAP";
+//	@Test
+//	public void postConsultaEstoqueSapComEstoqueMaisDeUmCodigoBarras() {	
+//		String resource = "ConsultaEstoqueSAP";
+//
+//		String body = "{\"Matnr\": \"1000000058\", " + "\"Werks\": \"10427805\", " + "\"Lgort\": \"0219\"}";
+//
+//		Response resp =
+//		given().header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(baseURI + resource).then()
+//				.assertThat().statusCode(200).contentType(ContentType.JSON)
+//				.body("MatConsEstoqResponse.TabMatReturn.Lgort", hasItems("1100", "1100"))
+//				.body("MatConsEstoqResponse.TabMatReturn.Licha", hasItems("PRCT0092019", null))
+//				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItems("25.000 ", "100.000 "))
+//				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItems("0", "0")).extract().response();
+//		
+//		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
+//	}
 
-		String body = "{\"Matnr\": \"1000000058\", " + "\"Werks\": \"10427805\", " + "\"Lgort\": \"0219\"}";
-
-		Response resp =
-		given().header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(baseURI + resource).then()
-				.assertThat().statusCode(200).contentType(ContentType.JSON)
-				.body("MatConsEstoqResponse.TabMatReturn.Lgort", hasItems("1100", "1100"))
-				.body("MatConsEstoqResponse.TabMatReturn.Licha", hasItems("PRCT0092019", null))
-				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItems("25.000 ", "100.000 "))
-				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItems("0", "0")).extract().response();
-		
-		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
-	}
-
-	@Test
-	public void postConsultaEstoqueSapSemEstoque() {
-		String resource = "ConsultaEstoqueSAP";
-		String body = "{\"Matnr\": \"1000000051\"," + "\"Werks\": \"10427805\", " + "\"Lgort\": \"0219\"} ";
-
-    	 Response resp =
-		given().header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(baseURI + resource).then()
-				.assertThat().statusCode(200).contentType(ContentType.JSON)
-				.body("MatConsEstoqResponse.TabMatReturn.Lgort", hasItem("1100"))
-//			.body("MatConsEstoqResponse.TabMatReturn.Licha", hasItem(null))
-				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItem("0"))
-				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItem("0"))
-				.body("MatConsEstoqResponse.TabMatReturn.DescErro",
-						hasItem("Não há saldo de estoque para os dados informados."))
-				.extract()
-				.response();
-
-
-		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
-
-	}
+//	@Test
+//	public void postConsultaEstoqueSapSemEstoque() {
+//		String resource = "ConsultaEstoqueSAP";
+//		String body = "{\"Matnr\": \"1000000051\"," + "\"Werks\": \"10427805\", " + "\"Lgort\": \"0219\"} ";
+//
+//    	 Response resp =
+//		given().header("versao-api", 1).body(body).contentType(ContentType.JSON).when().post(baseURI + resource).then()
+//				.assertThat().statusCode(200).contentType(ContentType.JSON)
+//				.body("MatConsEstoqResponse.TabMatReturn.Lgort", hasItem("1100"))
+////			.body("MatConsEstoqResponse.TabMatReturn.Licha", hasItem(null))
+//				.body("MatConsEstoqResponse.TabMatReturn.Clabs", hasItem("0"))
+//				.body("MatConsEstoqResponse.TabMatReturn.Labst", hasItem("0"))
+//				.body("MatConsEstoqResponse.TabMatReturn.DescErro",
+//						hasItem("Não há saldo de estoque para os dados informados."))
+//				.extract()
+//				.response();
+//
+//
+//		logTestResult(Status.PASS, body, resp, new Throwable().getStackTrace()[0].getMethodName());
+//
+//	}
 
 	@Test
 	public void postConsultaPacienteBaixaEstoquePorNomeSap() {

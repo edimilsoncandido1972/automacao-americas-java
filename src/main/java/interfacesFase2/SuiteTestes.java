@@ -9,12 +9,12 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	InterfacePingService.class,
-//	InterfaceConsultaEstoqueSAP.class
+	InterfaceConsultaEstoqueSAP.class
 })
 public class SuiteTestes {
 	@BeforeClass
 	public static void statTest() {
-		InterfaceMaster.InicalizaTeste();
+		InterfaceMaster.InicializaTeste();
 	}
 	
 	@AfterClass
