@@ -89,11 +89,11 @@ public class InterfaceConsultaEstoqueSAP { // Nome da classe
 				.post(InterfaceMaster.baseURI + resource).then()
 				.extract()
 				.response();
-		
+	    // mecher tambem edimilson
 		String msgSucesso = "";
 		String msgFalha = "";
 		
-		
+		// teste git edimilson
 		if(resp.getStatusCode() == 200) {
 			String lgort = InterfaceMaster.TratarTexto(resp.jsonPath().getString("MatConsEstoqResponse.TabMatReturn.Lgort"));
 			
